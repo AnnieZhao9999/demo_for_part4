@@ -31,11 +31,14 @@ $(function() {
         e.preventDefault()
         let name = $('.signUp [name=username]').val()
         $.post('/api/reguser', { username: name, password: $('.signUp [name=password]').val() }, function(res) {
+            console.log(res);
             if (res.status === 0) {
                 layer.msg('注册成功，请登录', function() {
                     $('.logInBtn').click()
                     $('.logIn [name=username]').val(name)
                 })
+            } else {
+                layer.msg(res.message)
             }
         })
     })
@@ -49,9 +52,10 @@ $(function() {
             url: '/api/login',
             data: $(this).serialize(),
             success: function(res) {
-
+                console.log(res);
                 if (res.status !== 0) {
-                    return layer.msg('登录失败，请重新登录')
+
+                    return layer.msg(res.message)
                 }
                 location.href = '/index.html'
                 localStorage.setItem('token', res.token)
