@@ -3,6 +3,7 @@
     width: 100%;
     text-align: center;
     line-height: 60px;
+    user-select: none;
 }
 
 .layui-logo {
@@ -30,6 +31,10 @@ iframe {
 
 .layui-body {
     overflow: hidden;
+}
+
+iframe {
+    border-width: 0;
 }
 
 .text-avatar {

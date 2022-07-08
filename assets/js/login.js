@@ -46,22 +46,25 @@ $(function() {
     // 登录接口
     $('.logInForm').on('submit', function(e) {
         e.preventDefault()
-
         $.ajax({
             method: 'post',
             url: '/api/login',
             data: $(this).serialize(),
             success: function(res) {
-                console.log(res);
-                if (res.status !== 0) {
-
-                    return layer.msg(res.message)
+                if (res.status === 1) {
+                    return layer.msg("登录失败")
                 }
+                layer.msg('登录成功')
                 location.href = '/index.html'
                 localStorage.setItem('token', res.token)
             }
         })
     })
+
+
+
+
+
 
 
 })

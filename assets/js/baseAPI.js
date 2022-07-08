@@ -8,17 +8,15 @@ $.ajaxPrefilter(function(options) {
         options.headers = {
             Authorization: localStorage.getItem('token') || '',
         }
-    }
 
-    // 为需要权限的接口设置complete回调函数，不能直接通过url打开页面
+        // 为需要权限的接口设置complete回调函数，不能直接通过url打开页面
+
+    }
     options.complete = function(res) {
         console.log(res);
-        if (res.responseJSON.status !== 0) {
+        if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
             localStorage.removeItem('token')
             location.href = '/login.html'
         }
     }
-
-
-
 })
